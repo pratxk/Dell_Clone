@@ -9,7 +9,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import { formatPrice } from "./PriceTag";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
 const OrderSummaryItem = (props) => {
   const { label, value, children } = props;
   return (
@@ -23,20 +24,24 @@ const OrderSummaryItem = (props) => {
 };
 
 export const CartOrderSummary = () => {
-  const { products } = useSelector((store) => store.Cart);
+  const [cart, setCart] = useState([]);
 
-  const sum = products.reduce((accumulator, object) => {
+  useEffect(() => {
+    const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(cartData);
+  }, []);
+
+  const sum = cart.reduce((accumulator, object) => {
     return accumulator + Number(object.discounted_price) * Number(object.items);
   }, 0);
 
   let tax;
-  products.length === 0
+  cart.length === 0
     ? (tax = 0)
     : (tax = Math.floor(Math.random() * (400 - 100) + 50));
 
   let total = tax + sum;
   localStorage.setItem("tax", JSON.stringify(tax));
-
 
   const navigate = useNavigate();
   return (

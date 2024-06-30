@@ -33,7 +33,7 @@ const Checkout = () => {
       >
         <VStack w="full" h="full" p={10} spacing={10} /*bg={"red.50"}*/>
           <VStack spacing={10} alignItems="center">
-            <Image onClick={()=>navigate("/")} src={logo} alt="mylogo" w={200} />
+            <Image onClick={() => navigate("/")} src={logo} alt="mylogo" w={200} />
             <Heading>Shipping Information</Heading>
             <form style={{ width: "100%" }}>
               <SimpleGrid column={2} columnGap={3} rowGap={6} width="full">
