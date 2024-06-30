@@ -65,13 +65,14 @@ function Home() {
             btnbgcolor2={'transparent'}
             btncolor2={'white'}
             btnhovercolor2={{ backgroundColor: 'white', color: 'black' }}
+            mblast={[0,0,380,0]}
 
             background={{base:'black',sm:'black',md:'black',lg:'#1e1e1d',xl:'1e1e1d'}}
           />
         </Carousel>
       </Box>
 
-      <Box backgroundColor={'#0a0e14'} w={{base:'50%',md:'100%'}}>
+      <Box backgroundColor={'#0a0e14'} w={{base:'80%',md:'100%'}}>
         <ServiceList />
       </Box>
 
@@ -83,7 +84,7 @@ function Home() {
             <Text fontSize={{base:28,lg:45}} fontWeight={200}>Featured Products and Solutions</Text>
           </Stack>
         </Box>
-        <Box m={10} pb={20} pl={10} pr={10} mr={10} w={{base:'40%',md:'100%'}}>
+        <Box m={10} pb={20} pl={{base:2,md:10}} pr={10} mr={10} w={{base:'40%',md:'60%',lg:'100%'}}>
 
           <Carousel>
 
@@ -97,7 +98,7 @@ function Home() {
       </Box>
 
       <Box mt={-10}>
-        <VideoBackgroundBox subHead={'CUSTOMER SUCCESS STORIES'} url={'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'} mainHead={'Delivering Accessebility Through GenAI'} bodyContent={'City of Amarillo taps Dell Technologies to make community services more accessible with GenAl.'} btnexist={true} btnContent={'Play Video'} backgroundColor='#0672cb' _hover={{ backgroundColor: 'blue.600' }} color='white' linkContent1={'Learn More'} linkContent2={'View All Stories'} rounded={0} w={'150px'} h={'50px'} btnlink2={true} />
+        <VideoBackgroundBox subHead={'CUSTOMER SUCCESS STORIES'} url={'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'} mainHead={'Delivering Accessebility Through GenAI'} bodyContent={'City of Amarillo taps Dell Technologies to make community services more accessible with GenAl.'} btnexist={false} btnContent={'Play Video'} backgroundColor='#0672cb' _hover={{ backgroundColor: 'blue.600' }} color='white' linkContent1={'Learn More'} linkContent2={'View All Stories'} rounded={0} w={'150px'} h={'50px'} btnlink2={true} />
       </Box>
 
       <Box alignItems={['left','center']} backgroundColor={'#1d2c3b'}  pl={20} pr={20} pt={20} pb={'60px'} >
@@ -144,7 +145,7 @@ function Home() {
         <CustomLayoutReversed url={'https://i.dell.com/is/image/DellContent/content/dam/ss2/page-specific/dell-homepage/en/my-account-or-dell-premier/dell-homepage-premier-1200x675.jpg?wid=1200&hei=675'} customCard={<Dell_Premier />} secondContainer={<Dell_Premier1/>} />
       </Box>
       <Box>
-        <VideoBackgroundBox subHead={'ADVANCING SUSTAINABILITY'} url={'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'} mainHead={'At the Core of Everything We Do'} bodyContent={'Creating sustainable products and solutions that drive change.'} btnexist={true} btnContent={'Play Video'} backgroundColor='#0672cb' _hover={{ backgroundColor: 'blue.600' }} color='white' linkContent1={"Discover how we're shaping a better future today"} btnlink2={false} rounded={0} w={'150px'} h={'50px'} />
+        <VideoBackgroundBox subHead={'ADVANCING SUSTAINABILITY'} url={'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'} mainHead={'At the Core of Everything We Do'} bodyContent={'Creating sustainable products and solutions that drive change.'} btnexist={false} btnContent={'Play Video'} backgroundColor='#0672cb' _hover={{ backgroundColor: 'blue.600' }} color='white' linkContent1={"Discover how we're shaping a better future today"} btnlink2={false} rounded={0} w={'150px'} h={'50px'} />
       </Box>
 
       <Box backgroundColor={'#002a58'} pl={[10,,15,20,28]} pr={28} pt={20} pb={'60px'}>

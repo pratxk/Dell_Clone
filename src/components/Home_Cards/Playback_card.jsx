@@ -15,7 +15,7 @@ export default function Playback_card({ image, mainHead, subHead, bodyContent, c
             flexDir={{ base: "column-reverse", sm: "column-reverse", md: "column-reverse", lg: "row", xl: "row" }}
             justifyContent="flex-start"
             h={{ base: 'auto', md: '600px' }}
-            mr={{base:-10,md:-10}}
+            mr={{base:-1,md:0}}
             position="relative"
             {...rest}
         >
@@ -63,8 +63,8 @@ export default function Playback_card({ image, mainHead, subHead, bodyContent, c
 
 function CustomCard({ subHead, mainHead, bodyContent, linkData, img }) {
     return (
-        <Box backgroundColor="white" p={4} w="100%" maxW={['md', 'md', 'lg', 'sm']} h={{base:'60%',md:'100%'}} boxShadow="lg">
-            <Box>
+        <Box backgroundColor="white" p={4} w="100%" maxW={['md', 'md', 'lg', 'sm']} h={{base:'60%',md:'100%'}} boxShadow={{base:'none',lg:"lg"}}>
+            <Box w={'fit-content'}>
                 <Text>{subHead}</Text>
                 <Heading mt={2} fontWeight={400}>{mainHead}</Heading>
                 <Text mt={2}>{bodyContent}</Text>

@@ -10,7 +10,7 @@ const CustomLayout = ({ customCard, url, firstContainer }) => {
                         {firstContainer}
                     </Box>
                 </Box>
-                <Box flex="3" w={{base:'50%',lg:'100%'}} position="relative">
+                <Box flex="3" w={{base:'30%',sm:'50%',lg:'100%'}} position="relative">
                     <Box
                         width="100%"
                         height="100%"

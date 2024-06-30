@@ -50,18 +50,20 @@ const VideoBackgroundBox = ({ url, boxbgColor, subHead, mainHead, bodyContent, b
                 left={{base:'40%',md:"50%"}}
                 transform="translate(-50%, -50%)"
                 color="white"
+                h={{base:'50%'}}
+                w={{base:'50%'}}
                 textAlign="center"
                 zIndex="2"
                 px={{ base: 4, md: 8 }}
             >
                 <Text fontSize={{ base: "sm", md: "md" }} fontWeight={600}>{subHead}</Text>
                 <Heading fontWeight={400} fontSize={{ base: "2xl", md: "4xl" }}>{mainHead}</Heading>
-                <Text fontSize={{ base: "sm", md: "md" }} mt={2} fontWeight={400}>{bodyContent}</Text>
+                <Text fontSize={{ base: "sm", md: "md" }} display={{base:'none', md:'block'}} mt={2} fontWeight={400}>{bodyContent}</Text>
                 {btnexist && (
                     <Button mt={8} {...btnAttr} leftIcon={<BiCaretRightCircle />}>{btnContent}</Button>
                 )}
 
-                <Flex justify={"center"} mt={5} flexDirection={{ base: "column", sm: "row" }}>
+                <Flex justify={"center"} mt={5} flexDirection={{ base: "column", sm: "row" }} display={{base:'none', md:'block'}}>
                     <Link href='#' mr={{ sm: 4, base: 0 }} mb={{ base: 2, sm: 0 }}>
                         <Flex align={"center"} gap={"2px"} backgroundColor={'transparent'} p={1}>
                             <Text whiteSpace={"nowrap"} color={'white'}>{linkContent1}</Text>

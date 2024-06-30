@@ -47,7 +47,7 @@ export function Account_BCard() {
 export function Account_B1Card() {
     return (
         <>
-            <Box backgroundColor={'#002a58'} color={'white'} align={'center'} w={{base:'50%',lg:'fit-content'}} p={7}>
+            <Box backgroundColor={'#002a58'} color={'white'} align={'center'} w={{base:'30%',sm:'50%',lg:'fit-content'}} p={7}>
                 <Heading fontWeight={300}>My Account</Heading>
                 <Text mt={4}>My Account is an easy, more centralized way to manage your tech.</Text>
                 <Flex justify={'center'} mt={7} gap={5}>
@@ -136,9 +136,9 @@ export function Dell_Premier() {
 export function Dell_Premier1() {
     return (
         <>
-            <Box backgroundColor={'#141d28'} color={'white'} align={'center'} w={{base:'50%',lg:'fit-content'}} p={7}>
+            <Box backgroundColor={'#141d28'} color={'white'} align={'center'} w={{base:'50%',sm:'70%',lg:'fit-content'}} p={7} border={'1px solid black'}>
                 <Heading fontWeight={300}>Dell Premier</Heading>
-                <Text w={[300,300,500]} mt={4}>Leverage hands-on IT purchasing for your business with personalised
+                <Text w={[250,300,500,505]} mt={4}>Leverage hands-on IT purchasing for your business with personalised
                     product selection and easy ordering via our customisable online
                     platform.</Text>
                 <Flex justify={'center'} align={'center'} mt={7} gap={5}>
@@ -148,7 +148,7 @@ export function Dell_Premier1() {
                             <BiArrowBack mt={2} style={{ transform: 'rotate(180deg)' }} fontSize={"18px"} color={"white"} />
                         </Flex>
                     </Link>
-                    <Button borderColor={'white'} w={'290px'} h={12} backgroundColor={'transparent'} color={'white'} rounded={3} _hover={{ backgroundColor: 'white', color: 'gray' }}>
+                    <Button borderColor={'white'}  w={{base:'fit-content',md:'290px'}} h={{base:'10',md:12}} backgroundColor={'transparent'} color={'white'} fontSize={{base:12}} rounded={3} _hover={{ backgroundColor: 'white', color: 'gray' }}>
                         Learn about Dell Premier
                     </Button>
                 </Flex>

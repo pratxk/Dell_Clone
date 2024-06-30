@@ -1,37 +1,59 @@
-import {
-    Box,
-    Button,
-    Center,
-    Flex,
-    HStack,
-    Heading,
-    Image,
-    Link,
-    Skeleton,
-    Stack,
-    useColorModeValue as mode,
-} from "@chakra-ui/react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Box, Button, Center, Flex, HStack, Heading, Image, Link, Skeleton, Stack, useColorModeValue as mode, useToast } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartItem } from "../components/Cart/CartItem";
 import { CartOrderSummary } from "../components/Cart/CartOrderSummary";
-import { clearAllProducts, getProducts } from "../Redux/Cart/action";
 import empty from "../assets/empty.png";
+import Quantity from "../components/Cart/Quantity"; // Import Quantity component
 
 const Cart = () => {
-    const dispatch = useDispatch();
-    const { products, isLoading } = useSelector(store => store.Cart);
+    const [isLoading, setIsLoading] = useState(false);
+    const [cart, setCart] = useState([]);
+    const toast = useToast();
     const navigate = useNavigate();
 
+    const updateCart = () => {
+        const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+        setCart(cartData);
+        setIsLoading(false);
+    };
+
     useEffect(() => {
-        dispatch(getProducts());
-    }, [dispatch]);
+        setIsLoading(true);
+        updateCart();
+    }, []);
 
     const handleClear = () => {
-        dispatch(clearAllProducts()).then(() => {
-            dispatch(getProducts());
+        localStorage.removeItem("cart");
+        updateCart();
+    };
+
+    const handleItemDelete = (id) => {
+        const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+        const updatedCart = cartData.filter((item) => item.id !== id);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        updateCart();
+        toast({
+            title: "Cart Status",
+            description: "Item removed from cart",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
         });
+    };
+
+    const handleQuantityUpdate = (id, newQuantity) => {
+        // Update local storage with new quantity
+        const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+        const updatedCart = cartData.map((item) => {
+            if (item.id === id) {
+                return { ...item, items: newQuantity }; // Assuming 'items' is the key for quantity in your cart item
+            }
+            return item;
+        });
+
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        updateCart();
     };
 
     return (
@@ -54,7 +76,7 @@ const Cart = () => {
         >
             <Flex flexDir="column" gap={8}>
                 <Heading fontSize="2xl" fontWeight="extrabold">
-                    Shopping Cart ({products.length} items)
+                    Shopping Cart ({cart.length} items)
                 </Heading>
                 <Stack
                     direction={{
@@ -78,11 +100,11 @@ const Cart = () => {
                     >
                         {isLoading ? (
                             <Flex flexDir={"column"} gap={4}>
-                                <Skeleton w='full' h='150px'></Skeleton>
-                                <Skeleton w='full' h='150px'></Skeleton>
-                                <Skeleton w='full' h='150px'></Skeleton>
+                                <Skeleton w="full" h="150px"></Skeleton>
+                                <Skeleton w="full" h="150px"></Skeleton>
+                                <Skeleton w="full" h="150px"></Skeleton>
                             </Flex>
-                        ) : products.length <= 0 ? (
+                        ) : cart.length <= 0 ? (
                             <Center>
                                 <Image src={empty} alt="emptycart" m={"auto"} w={250} mt={"70px"} />
                             </Center>
@@ -96,11 +118,16 @@ const Cart = () => {
                                     rounded={"md"}
                                     p={4}
                                 >
-                                    {products.map(item => (
-                                        <CartItem key={item.id} {...item} />
+                                    {cart.map((item) => (
+                                        <CartItem
+                                            key={item.id}
+                                            {...item}
+                                            onDelete={handleItemDelete}
+                                            onUpdateQuantity={handleQuantityUpdate} // Pass the update function
+                                        />
                                     ))}
                                 </Stack>
-                                <Button colorScheme="red" onClick={() => handleClear()}>
+                                <Button colorScheme="red" onClick={handleClear}>
                                     Clear All
                                 </Button>
                             </>
@@ -109,7 +136,6 @@ const Cart = () => {
 
                     <Flex direction="column" align="center" flex="1">
                         <CartOrderSummary />
-
                         <HStack mt="6" fontWeight="semibold">
                             <p>or</p>
                             <Link onClick={() => navigate("/products")} color={mode("blue.500", "blue.200")}>

@@ -30,7 +30,7 @@ export default function HomeLeft({ title, head, body, img, btn1, bodyColor, btnc
                 justify={"center"}
                 height={'full'}
                 {...rest}
-                width={{base:'inherit',lg:'inherit'}}
+                width={'inherit'}
                 mb={mblast}
             >
                 <Heading lineHeight={1.1} w='50%'>
@@ -99,7 +99,7 @@ export default function HomeLeft({ title, head, body, img, btn1, bodyColor, btnc
                         // h={{base:'',sm:'',md:'300px',lg:'430px',xl:'447px'}}
                         h={'full'}
                         // w={{base:'',sm:'',md:'800px',lg:'850px',xl:'950px'}}
-                        w={{base:'50%',lg:'100%'}}
+                        w={'full'}
                         src={img}
                     />
 

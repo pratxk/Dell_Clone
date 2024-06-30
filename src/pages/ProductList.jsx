@@ -15,10 +15,12 @@ import FilterSection from "../components/Product_list/FilterSection";
 import Pagination from "../components/Product_list/Pagination";
 import ProductCard from "../components/Product_list/ProductCard";
 import { useSearchParams } from "react-router-dom";
+import { PRODUCT_ITEMS } from "../Redux/Product/product";
 
 const ProductList = () => {
   const dispatch = useDispatch();
-  const { products, isLoading } = useSelector((store) => store.Product);
+  // const { products, isLoading } = useSelector((store) => store.Product);
+  const[isLoading,setIsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const initialMemory = searchParams.getAll("memory");
   const [memory] = useState(initialMemory || []);
@@ -42,6 +44,9 @@ const ProductList = () => {
   // getting sort data in localStorage for using same sort on refresh
   const [sortBy, setSortBy] = useState(localStorage.getItem("sortBy") || "");
   const [order, setOrder] = useState(localStorage.getItem("order") || "");
+
+
+
 
   const handlePrev = () => {
     if (page > 1) setPage((page) => page - 1);
@@ -78,35 +83,44 @@ const ProductList = () => {
     }
   }, [sortAndOrder]);
 
-  useEffect(() => {
-    const paramObj = {
-      params: {
-        keyword,
-        category,
-        memory,
-        storage,
-        "discounted_price[lte]": initialMinPrice,
-        "discounted_price[gte]": initialMaxPrice,
-        _page: page, // Use _page instead of page here
-        _limit: limit,
-      },
-    };
+  useEffect(()=>{
+    if(PRODUCT_ITEMS.length<0){
+      setIsLoading(true);
+    }
+    else{
+      setIsLoading(false)
+    }
+  })
 
-    // get processor form search params
-    const processor = searchParams.get("processor");
+  // useEffect(() => {
+  //   const paramObj = {
+  //     params: {
+  //       keyword,
+  //       category,
+  //       memory,
+  //       storage,
+  //       "discounted_price[lte]": initialMinPrice,
+  //       "discounted_price[gte]": initialMaxPrice,
+  //       _page: page, // Use _page instead of page here
+  //       _limit: limit,
+  //     },
+  //   };
 
-    if (processor) paramObj.params.processor = processor;
+  //   // get processor form search params
+  //   const processor = searchParams.get("processor");
 
-    dispatch(getProducts(paramObj));
-  }, [dispatch, page, limit, keyword, category, memory, storage, initialMinPrice, initialMaxPrice]);
+  //   if (processor) paramObj.params.processor = processor;
 
-  // Update URL search parameters when page or limit changes
-  useEffect(() => {
-    setSearchParams({
-      _page: page, // Use _page instead of page here
-      _limit: limit,
-    });
-  }, [page, limit, setSearchParams]);
+  //   dispatch(getProducts(paramObj));
+  // }, [dispatch, page, limit, keyword, category, memory, storage, initialMinPrice, initialMaxPrice]);
+
+  // // Update URL search parameters when page or limit changes
+  // useEffect(() => {
+  //   setSearchParams({
+  //     _page: page, // Use _page instead of page here
+  //     _limit: limit,
+  //   });
+  // }, [page, limit, setSearchParams]);
 
   return (
     <Flex
@@ -153,7 +167,7 @@ const ProductList = () => {
           ) : (
             <>
               <SimpleGrid gap={4}>
-                {products.map((product) => (
+                {PRODUCT_ITEMS.map((product) => (
                   <ProductCard
                     key={product.id}
                     id={product.id}
